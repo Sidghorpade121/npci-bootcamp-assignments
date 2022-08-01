@@ -1,0 +1,61 @@
+
+<div class="container">
+  <h2 >Add Employee Details</h2>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        
+        <div class="form-group">
+          <label for="description" >Department  no :</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            [(ngModel)]="department.deptno"
+            name="deptNo"
+          />
+        </div>
+        <div class="form-group">
+            <label for="description">Department Name</label>
+            <input
+            type="text"
+              class="form-control"
+              id="dname"
+              required
+              [(ngModel)]="department.dname"
+              name="dname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Location </label>
+            <input
+            type="loc"
+              class="form-control"
+              id="date"
+              required
+              [(ngModel)]="department.loc"
+              name="location"
+            />
+          </div>
+        
+    
+         
+  
+        <button (click)="saveDepartment()" class="btn btn-success">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Department was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newDepartment()">Add</button>
+        &nbsp;
+        <a routerLink="/Home" class="btn btn-success" >Back to Home</a>
+        &nbsp;
+        <a routerLink="/departments" class="btn btn-success" >Show Departments</a>
+        
+      </div>
+    </div>
+  </div>
+    
+
+
+  

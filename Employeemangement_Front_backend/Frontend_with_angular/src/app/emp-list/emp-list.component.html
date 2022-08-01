@@ -1,0 +1,24 @@
+<p>emp-list works!</p>
+<div class="container">
+
+    <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Salary</th>
+                <th>Manager</th>
+                <th>Commission</th>
+               
+            </tr>
+    
+        </thead>
+        <tr  *ngFor="let emp of employees">
+            <td>{{emp.ename }} </td>
+            <td>{{emp.job}}</td>
+            <td>{{emp.salary | currency:'INR'}}</td>
+            <td>{{emp.managerId}}</td>
+            <td>{{emp.commission | currency:'INR'}}</td>
+        </tr>
+        </table>
+</div>
