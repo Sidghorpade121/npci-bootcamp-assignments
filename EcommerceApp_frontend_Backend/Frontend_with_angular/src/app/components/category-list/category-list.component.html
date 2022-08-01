@@ -1,0 +1,16 @@
+<div class="container" style="background-color: powderblue;">
+
+    <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th>Category Id</th>
+                <th>Category</th>
+            </tr>
+
+        </thead>
+        <tr *ngFor="let cat of categories">
+            <td>{{cat.categoryId}} </td>
+            <td>{{cat.categoryname}} </td>
+        </tr>
+    </table>
+</div>

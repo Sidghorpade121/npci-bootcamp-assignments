@@ -1,0 +1,36 @@
+
+<div class="container">
+
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        
+        <div class="form-group">
+          <label for="description" >Category name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="categoryname"
+            required
+            [(ngModel)]="category.categoryname"
+            name="categoryname"
+          />
+        </div>
+        
+  
+        <button (click)="saveCategory()" class="btn btn-success">Submit</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Category was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newCategory()">Add</button>
+        &nbsp;
+        <a routerLink="/Home" class="btn btn-success" >Back to Home</a>
+        &nbsp;
+        <a routerLink="/categories" class="btn btn-success" >Show Categories</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+  
