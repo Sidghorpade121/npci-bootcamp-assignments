@@ -1,0 +1,41 @@
+<!-- <div class="container" style="background-color: powderblue;">
+
+    <table class='table table-hover'>
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>SKU</th>
+                <th>Product name</th>
+                <th>Description</th>
+                <th>unit_price</th>
+                <th>imageurl</th>
+                <th>units_in_stock</th>
+                <th>price</th>
+                <th>categoryId</th>
+
+            </tr>
+
+        </thead>
+        <tr *ngFor="let pro of products">
+            <td>{{pro.id}} </td>
+            <td>{{pro.sku}} </td>
+            <td>{{pro.name}} </td>
+            <td>{{pro.desciption}} </td>
+            <td>{{pro.unit_price}} </td>
+            <td>{{pro.imageurl}} </td>
+            <td>{{pro.units_in_stock}} </td>
+            <td>{{pro.price}} </td>
+            <td>{{pro.categoryId}} </td>
+
+
+
+        </tr>
+    </table>
+</div>-->
+<div class="row">
+    
+    <div class="col-md-4" *ngFor="let productItem of products">
+      <app-product-item [productsItem]="productItem"></app-product-item>
+    </div>
+  </div>
+  

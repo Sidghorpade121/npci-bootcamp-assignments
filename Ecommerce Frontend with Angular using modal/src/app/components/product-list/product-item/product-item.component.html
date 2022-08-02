@@ -1,0 +1,55 @@
+
+<div class="card mb-4 shadow-sm">
+    <img class="bd-placeholder-img card-img-top p-2" width="500%" src= {{productsItem.imageurl}} />
+  
+    <div class="card-body">
+      <p class="card-text">
+        <strong>{{ productsItem.desciption }}</strong>
+        <i  class="fas fa-heart float-right" ></i>
+        <i class="far fa-heart float-right" ></i>
+      </p>
+      <p class="card-text">{{ productsItem.price | currency:'INR' }}</p>
+      <strong>In Stock</strong>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <button type="button" class="btn btn-sm btn-primary product-btn" (click)="handleAddToCart()">Add to
+            Cart</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary product-btn" (click)="openModal()">View Details</button>
+          
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+         <div class="modal-dialog" role="document">
+               <div class="modal-content" style="background-color:rgba(237, 237, 237, 0.984) ;">
+                     <div class="modal-header">
+                           <h4 class="modal-title" >{{ productsItem.desciption}}</h4>
+                           <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                         </div>
+                <div class="modal-body" style="background-image:linear-gradient(rgb(12, 136, 213), rgb(198, 211, 220)) ;">
+                  <img class="bd-placeholder-img card-img-top p-2" width="500%" height="500%" src= {{productsItem.imageurl}} />
+                  <br>
+                  <b >Product Id :</b>
+                  &nbsp;
+                  <strong  >{{ productsItem.id }}</strong>
+                  <br>
+                  <b >Product :</b>
+                  &nbsp;
+                  <strong>{{ productsItem.name }}</strong>
+                  <br>
+                  <b> Qty in stock :</b>
+                  &nbsp;
+                  <strong>{{ productsItem.units_in_stock }}</strong>
+                  <br>
+                  <b >Price :</b>
+                  &nbsp;
+                  <strong>{{ productsItem.price | currency:'INR' }}</strong>
+                         </div>
+                     <div class="modal-footer">
+                           <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+                         </div>
+            </div>
+             </div>
+ </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>

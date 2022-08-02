@@ -1,0 +1,157 @@
+
+<div class="container">
+
+  <h2>Add Product </h2>
+
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        
+        <div class="form-group">
+          <label for="description" >Product sku:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            [(ngModel)]="product.sku"
+            name="sku"
+          />
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="description">Product name:</label>
+            <input
+            type="text"
+              class="form-control"
+              id="name"
+              required
+              [(ngModel)]="product.name"
+              name="name"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description">Product description:</label>
+            <input
+            type="text"
+              class="form-control"
+              id="description"
+              required
+              [(ngModel)]="product.desciption"
+              name="desciption"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description">Unit Price :</label>
+            <input
+            type="number"
+              class="form-control"
+              id="date"
+              required
+              [(ngModel)]="product.unit_price"
+              name="unit_price"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description">Product imageurl:</label>
+            <input
+            type="text"
+              class="form-control"
+              id="name"
+              required
+              [(ngModel)]="product.imageurl"
+              name="imageurl"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description"> units_in_stock</label>
+            <input
+            type="number"
+              class="form-control"
+              id="mid"
+              required
+              [(ngModel)]="product.units_in_stock"
+              name="units_in_stock"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description">price</label>
+            <input
+            type="number"
+              class="form-control"
+              id="sal"
+              required
+              [(ngModel)]="product.price"
+              name="salary"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description">datecreated :</label>
+            <input
+            type="date"
+              class="form-control"
+              id="datecreated"
+              required
+              [(ngModel)]="product.datecreated"
+              name="datecreated"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description">lastUpdated</label>
+            <input
+            type="date"
+              class="form-control"
+              id="datecreated"
+              required
+              [(ngModel)]="product.lastUpdated"
+              name="lastUpdated"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label for="description">Category Id </label>
+            <input
+            type="number"
+              class="form-control"
+              id="catid"
+              required
+              [(ngModel)]="product.categoryId"
+              name="lastUpdated"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label>Categories </label>
+            &nbsp;
+                <select name="category" [(ngModel)] = "product.categoryId">
+                    <option *ngFor="let cat of categories" value="{{cat.categoryId}}">{{cat.categoryname}}</option>
+                </select>
+            
+        </div>
+         
+        <br>
+        <button (click)="saveProduct()" class="btn btn-success">Submit</button>
+        &nbsp;
+        <button class="btn btn-success" (click)="newProduct()">Reset</button>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Product was submitted successfully!</h4>
+        <button class="btn btn-success" (click)="newProduct()">Add</button>
+        &nbsp;
+        <a routerLink="/Home" class="btn btn-success" >Back to Home</a>
+        &nbsp;
+        <a routerLink="/products" class="btn btn-success" >Show Products</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+  
