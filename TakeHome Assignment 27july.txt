@@ -1,0 +1,351 @@
+package Mankatha;
+
+import java.util.Objects;
+
+public class Card {
+	private int rank;
+	private int suit;
+
+	public static final int ACE = 1;
+	public static final int TWO = 2;
+	public static final int THREE = 3;
+	public static final int FOUR = 4;
+	public static final int FIVE = 5;
+	public static final int SIX = 6;
+	public static final int SEVEN = 7;
+	public static final int EIGHT = 8;
+	public static final int NINE = 9;
+	public static final int TEN = 10;
+	public static final int JACK = 11;
+	public static final int QUEEN = 12;
+	public static final int KING = 13;
+
+	public static final int SPADES = 1;
+	public static final int HEARTS = 2;
+	public static final int DIAMONDS = 3;
+	public static final int CLUBS = 4;
+
+	private static final String SPADES_STRING = "S";
+	private static final String HEARTS_STRING = "H";
+	private static final String DIAMONDS_STRING = "D";
+	private static final String CLUBS_STRING = "C";
+
+	private static final String ACE_STRING = "A";
+	private static final String JACK_STRING = "J";
+	private static final String QUEEN_STRING = "Q";
+	private static final String KING_STRING = "K";
+
+	public Card(int rank, int suit) throws InvalidCardException, InvalidRankException, InvaliSuitException {
+		if ((rank >= ACE && rank <= KING) && (suit >= SPADES && suit <= CLUBS)) {
+			setRank(rank);
+			setSuit(suit);
+		} else {
+			throw new InvalidCardException("Invalid rank and/or suit; Card initialized with zero values");
+		}
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public int getSuit() {
+		return suit;
+	}
+
+	public Boolean isValid() {
+		return (rank >= ACE && rank <= KING) && (suit >= SPADES && suit <= CLUBS);
+	}
+
+	public void setRank(int rank) throws InvalidRankException {
+		if (rank >= ACE && rank <= KING) {
+			this.rank = rank;
+		} else {
+			throw new InvalidRankException(rank + " is Invalid rank value");
+
+		}
+	}
+
+	public void setSuit(int suit) throws InvaliSuitException {
+		if (suit >= SPADES && suit <= CLUBS) {
+			this.suit = suit;
+		} else {
+			throw new InvaliSuitException(suit + " is Invalid suit value");
+		}
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		return rank == other.rank && suit == other.suit;
+	}
+
+	@Override
+	public String toString() {
+		String suitString = "";
+		String rankString = "";
+		switch (suit) {
+		case SPADES:
+			suitString = SPADES_STRING;
+			break;
+		case DIAMONDS:
+			suitString = DIAMONDS_STRING;
+			break;
+		case HEARTS:
+			suitString = HEARTS_STRING;
+			break;
+		case CLUBS:
+			suitString = CLUBS_STRING;
+			break;
+		}
+		switch (rank) {
+		case ACE:
+			rankString = ACE_STRING;
+			break;
+		case JACK:
+			rankString = JACK_STRING;
+			break;
+		case QUEEN:
+			rankString = QUEEN_STRING;
+			break;
+		case KING:
+			rankString = KING_STRING;
+			break;
+		default:
+			rankString = String.valueOf(rank);
+		}
+		return rankString + suitString;
+	}
+
+}
+
+
+**********************************************************************************************************************
+
+package Mankatha;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+public class Hand {
+private List<Card> deckOfCards;
+	
+	public Hand() throws InvalidCardException, InvalidRankException, InvaliSuitException {
+		this.deckOfCards = orderedListOfCards();
+	}
+
+	public List<Card> orderedListOfCards() throws InvalidCardException, InvalidRankException, InvaliSuitException {
+		List<Card> deckOfCards = new ArrayList<Card>();
+		for(int i=1;i<=4;i++) {
+			for(int j=1;j<=13;j++) {
+				Card c = new Card(j,i);
+				deckOfCards.add(c);
+			}
+		}
+		return deckOfCards;
+	}
+	
+	public List<Card> shuffleTheDeck(){
+		Collections.shuffle(deckOfCards);
+		return deckOfCards;
+	}
+	
+
+	public int chhoseWinner(Map<Integer, CardHolder> CardHolderDetails) {
+		List<Card> list = shuffleTheDeck();
+		int host = 0;
+			Card forInOrientation = list.remove(0);
+			Card forOutOrientation = list.remove(0);
+			for(Map.Entry<Integer, CardHolder> element : CardHolderDetails.entrySet()) {
+				if(element.getValue() == null) {
+					host = element.getKey();
+				}
+				else if((forInOrientation == element.getValue().getSelected_card() && element.getValue().getSelected_orienttion().equalsIgnoreCase("IN"))
+						|| (forOutOrientation == element.getValue().getSelected_card() && element.getValue().getSelected_orienttion().equalsIgnoreCase("OUT"))) {
+					return element.getKey();
+				}
+			}
+			return host;
+	}
+}
+
+********************************************************************************************************************************************************************************************************
+
+package Mankatha;
+
+public class CardHolder {
+	private int CardholderId;
+	private double betting_amount;
+	private Card selected_card;
+	private String selected_orienttion;
+
+	public CardHolder() {
+	}
+
+	public CardHolder(int cardholderId, double betting_amount, Card selected_card, String selected_orienttion) {
+		super();
+		CardholderId = cardholderId;
+		this.betting_amount = betting_amount;
+		this.selected_card = selected_card;
+		this.selected_orienttion = selected_orienttion;
+	}
+
+	public int getCardholderId() {
+		return CardholderId;
+	}
+
+	public void setCardholderId(int cardholderId) {
+		CardholderId = cardholderId;
+	}
+
+	public double getBetting_amount() {
+		return betting_amount;
+	}
+
+	public void setBetting_amount(double betting_amount) {
+		this.betting_amount = betting_amount;
+	}
+
+	public Card getSelected_card() {
+		return selected_card;
+	}
+
+	public void setSelected_card(Card selected_card) {
+		this.selected_card = selected_card;
+	}
+
+	public String getSelected_orienttion() {
+		return selected_orienttion;
+	}
+
+	public void setSelected_orienttion(String selected_orienttion) {
+		this.selected_orienttion = selected_orienttion;
+	}
+
+}
+
+***********************************************************************************************************************************
+
+package Mankatha;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Play {
+	public static void main(String[] args) {
+		Hand d = null;
+		try {
+			try {
+				d = new Hand();
+			} catch (InvalidRankException | InvaliSuitException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (InvalidCardException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Scanner s = new Scanner(System.in);
+		System.out.println("Welcome to the Mankatha Game ");
+		System.out.println("Enter number of players ");
+		int numOfPlayers = s.nextInt();
+		Random random = new Random();
+		int host_player = random.nextInt(1, numOfPlayers);
+		boolean play = true;
+
+		while (play) {
+			Map<Integer, CardHolder> progress_of_player = new LinkedHashMap<Integer, CardHolder>();
+			double sum_of_bet_amount = 0;
+			System.out.println("Player " + host_player + " Is Host ");
+
+			for (int i = 1; i <= numOfPlayers; i++) {
+				if (host_player == i) {
+					progress_of_player.put(i, null);
+				} else {
+					System.out.println("Player " + i + " Say your card as Rank and Suit as (1-13 and 1-4)");
+					int Rank = s.nextInt();
+					int Suit = s.nextInt();
+					Card card = null;
+					try {
+						try {
+							card = new Card(Rank, Suit);
+							System.out.println("Player " + i + " Enter your Bet Amount");
+							double bet_amount = s.nextDouble();
+							System.out.println("Player " + i + " Enter your orientation as In Or Out ");
+							String chosenOrientation = s.next();
+							CardHolder p = new CardHolder(i, bet_amount, card, chosenOrientation);
+							progress_of_player.put(i, p);
+							sum_of_bet_amount += p.getBetting_amount();
+							System.out.println("Player " + d.chhoseWinner(progress_of_player)
+									+ " you Won!\n collect your Bet amount " + sum_of_bet_amount);
+							System.out.println("Host is you from now");
+							
+							host_player = d.chhoseWinner(progress_of_player);
+
+						} catch (InvalidRankException | InvaliSuitException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (InvalidCardException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			}
+			
+			System.out.println("You wants to play again give input as Y/N");
+			if (!s.next().equalsIgnoreCase("Y")) {
+				play = false;
+				System.out.println("Thanks for Playing");
+			}
+		}
+	}
+}
+
+**********************************************************************************************************************************************************
+package Mankatha;
+
+public class InvalidCardException extends Exception{
+	
+	String msg;
+	
+	public InvalidCardException(String msg) {
+		super(msg);
+	}
+
+}
+**********************************************************************************************************************************************************
+package Mankatha;
+
+public class InvalidRankException extends Exception {
+
+	String msg;
+	
+	public InvalidRankException(String msg) {
+		super(msg);
+	}
+}
+
+**********************************************************************************************************************************************************
+package Mankatha;
+
+public class InvaliSuitException extends Exception {
+	String msg;
+	
+	public InvaliSuitException(String msg) {
+		super(msg);
+	}
+}
+**********************************************************************************************************************************************************
+
